@@ -63,7 +63,7 @@ public class GDBreakout extends GraphicsProgram {
 
 	// Animation delay or pause time between ball moves (ms)
 	public static final double DELAY = 1000.0 / 60.0;
-//    public static final double DELAY = 5.0;
+//    public static final double DELAY = 0.9;
 
 	// Number of turns 
 	public static final int NTURNS = 3;
@@ -90,7 +90,7 @@ public class GDBreakout extends GraphicsProgram {
 			playGame();
 
 			if (brickNumber == 0){
-				printGameResult("Win");
+				printGameResult("Win", Color.GREEN);
 				break;
 			}
 
@@ -100,15 +100,15 @@ public class GDBreakout extends GraphicsProgram {
             }
 		}
 		if (brickNumber > 0){
-            printGameResult("lose");
+            printGameResult("lose", Color.RED);
         }
 
 	}
 
-    private void printGameResult(String result){
+    private void printGameResult(String result, Color color){
 		GLabel label = new GLabel(result, getWidth()/2, getHeight()/2);
 		label.move(-label.getWidth()/2, -label.getHeight()/2);
-		label.setColor(Color.RED);
+		label.setColor(color);
 		add(label);
 	}
 
