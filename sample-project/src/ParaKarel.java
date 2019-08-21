@@ -9,7 +9,9 @@ import acm.graphics.*;
 import acm.program.*;
 import acm.util.*;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -255,41 +257,31 @@ public class ParaKarel extends ConsoleProgram {
 	 * selects from among 10 choices.
 	 */
 	private String getRandomWord() {
-		int index = rg.nextInt(10);
-		if(index == 0) return "BUOY";
-		if(index == 1) return "COMPUTER";
-		if(index == 2) return "CONNOISSEUR";
-		if(index == 3) return "DEHYDRATE";
-		if(index == 4) return "FUZZY";
-		if(index == 5) return "HUBBUB";
-		if(index == 6) return "KEYHOLE";
-		if(index == 7) return "QUAGMIRE";
-		if(index == 8) return "SLITHER";
-		if(index == 9) return "ZIRCON";
-		throw new ErrorException("getWord: Illegal index");
-//		return getRandomWordFromFile("ShorterLexicon.txt");
+        return getRandomWordFromFile("res/ShorterLexicon.txt");
 	}
 
-	private String getRandomWordFromFile(String  name) {
-		ArrayList<String> list = new ArrayList<String>();
-		try {
-			Scanner input = new Scanner(new File(name));
-			while (input.hasNextLine()){
-				String line = input.nextLine();
-				list.add(line);
-			}
-			input.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    private String getRandomWordFromFile(String  name) {
+        ArrayList<String> list = new ArrayList<String>();
+        try {
+            Scanner input = new Scanner(new File(name));
+            while (input.hasNextLine()){
+                String line = input.nextLine();
+                if (line != null && line.length()>0){
+                    list.add(line);
+                }
+            }
+            input.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-		int size = list.size();
+        int size = list.size();
 
-		if (size>0){
-			int index = rg.nextInt(size);
-			return list.get(index);
-		} else {
-			throw new ErrorException("there is no word in the file");
-		}
-	}
+        if (size>0){
+            int index = rg.nextInt(size);
+            return list.get(index);
+        } else {
+            throw new ErrorException("there is no word in the file");
+        }
+    }
 }
